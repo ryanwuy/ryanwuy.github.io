@@ -46,7 +46,7 @@
     
     <title>
         
-            归档 | 
+            java中Base64转码与解码（加密与解密）原理与使用 | 
         
         青山精神病院
     </title>
@@ -57,7 +57,7 @@
 
     <meta name="format-detection" content="telephone=no">
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="748534717,ryan,青山,病人,303,博客,hexo">
+    <meta name="keywords" content="748534717,ryan,青山,病人,303,博客,hexo,base64,加密,解密,java,原理">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -218,7 +218,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="青山精神病院">
-    <meta name="msapplication-starturl" content="http://www.wying.xyz/archives/">
+    <meta name="msapplication-starturl" content="http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="青山精神病院">
@@ -233,13 +233,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://www.wying.xyz/archives/">
+    <meta property="og:url" content="http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档 | 青山精神病院">
+    <meta property="og:title" content="java中Base64转码与解码（加密与解密）原理与使用 | 青山精神病院">
     <meta property="og:image" content="/img/favicon.png">
     <meta property="og:description" content="">
-    
+    <meta property="og:article:tag" content="base64,加密,解密,java,原理"> 
 
+    
+        <meta property="article:published_time" content="Thu Dec 06 2018 07:01:00 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 06 2018 07:13:16 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -247,13 +250,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://www.wying.xyz/archives/index.html">
+        <link rel="canonical" href="http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html">
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html",
+    "headline": "java中Base64转码与解码（加密与解密）原理与使用",
+    "datePublished": "Thu Dec 06 2018 07:01:00 GMT+0800",
+    "dateModified": "Thu Dec 06 2018 07:13:16 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Ryan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://images.jefflemon.com/images/Absolut_18770862511574123.jpg"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "青山精神病院",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",base64,加密,解密,java,原理748534717,ryan,青山,病人,303,博客,hexo",
+    "description": "",
+}
+</script>
 
 
     
@@ -287,207 +320,366 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Base64编码表"><span class="post-toc-number">1.</span> <span class="post-toc-text">Base64编码表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#示例代码"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">示例代码:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#String类型：进行Base64编码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">String类型：进行Base64编码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#String类型：进行Base64解码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">String类型：进行Base64解码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#指定字符编码方式"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">指定字符编码方式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对文件进行编码"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">对文件进行编码:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码示例Base64编码："><span class="post-toc-number">1.6.</span> <span class="post-toc-text">代码示例Base64编码：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码示例Base64解码："><span class="post-toc-number">1.7.</span> <span class="post-toc-text">代码示例Base64解码：</span></a></li></ol></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/0612cjpbsna1f00005js653v680ni.html">Android 键盘键名和键值列表</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            电话键
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/0612cjpbsna1f00005js653v680ni.html" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://images.jefflemon.com/images/Absolut_18770862511574123.jpg" width="44px" height="44px" alt="Ryan's avatar">
-            </div>
-            <div>
-                <strong>Ryan</strong>
-                <span>12月 06, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/0612cjpbsna2i00035js6dyf84wez.html">java中Base64转码与解码（加密与解密）原理与使用</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，大家可以查看RFC2045~RFC2049，上面有MIME的详细规范。
-...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/0612cjpbsna2i00035js6dyf84wez.html" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://images.jefflemon.com/images/Absolut_18770862511574123.jpg" width="44px" height="44px" alt="Ryan's avatar">
-            </div>
-            <div>
-                <strong>Ryan</strong>
-                <span>12月 06, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/0612cjpbsna2100015js6ms7pdah8.html">[Lua]获取文件夹大小</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            发现Lua有获取文件字节和大小的代码，却没有获取文件夹底下所有文件的大小的代码，所以自己写了一个函数，分享给大家以及留作备份。
-本病人...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/0612cjpbsna2100015js6ms7pdah8.html" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://images.jefflemon.com/images/Absolut_18770862511574123.jpg" width="44px" height="44px" alt="Ryan's avatar">
-            </div>
-            <div>
-                <strong>Ryan</strong>
-                <span>12月 06, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                java中Base64转码与解码（加密与解密）原理与使用
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="http://images.jefflemon.com/images/Absolut_18770862511574123.jpg" width="44px" height="44px" alt="Author Avatar">
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Ryan</strong>
+        <span>12月 06, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/base64-加密-解密-java-原理/">base64,加密,解密,java,原理</a>
+    </li></ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=java中Base64转码与解码（加密与解密）原理与使用&url=http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html&pic=http://www.wying.xyz/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=java中Base64转码与解码（加密与解密）原理与使用&url=http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html&via=Ryan" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=青山精神病院&title=java中Base64转码与解码（加密与解密）原理与使用&summary=&pics=http://www.wying.xyz/img/favicon.png&url=http://www.wying.xyz/posts/0612cjpbsna2i00035js6dyf84wez.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
     
 </div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，大家可以查看RFC2045~RFC2049，上面有MIME的详细规范。</p>
+<p>Base64编码可用于在HTTP环境下传递较长的标识信息。<br>例如，在Java Persistence系统Hibernate中，就采用了Base64来将一个较长的唯一标识符(一般为128-bit的UUID)编码为一个字符串，用作HTTP表单和HTTP GET URL中的参数。在其他应用程序中，也常常需要把二进制数据编码为适合放在URL(包括隐藏表单域)中的形式。此时，采用Base64编码具有不可读性，即所编码的数据不会被人用肉眼所直接看到，算是起到一个加密的作用。</p>
+<p>Base64使用A–Z,a–z,0–9,+,/ 这64个字符，编码原理是将3个字节转换成4个字节( (3 X 8) = 24 = (4 X 6) )先读入3个字节,每读一个字节,左移8位,再右移四次,每次6位,这样就有4个字节了，这样还不能保证得到的字符都是可见字符，为了达到此目的，Base64制定了一个编码表，进行统一的转换。<br>码表的大小为2^6=64，这也是Base64名称的由来。 当剩下的字符数量不足3个字节时，则应使用0进行填充，相应的，输出字符则使用’=’占位，因此编码后输出的文本末尾可能会出现1至2个’=’。解码原理是将4个字节转换成3个字节.先读入4个6位(用或运算),每次左移6位,再右移3次,每次8位，这样就还原了。</p>
+<h3 id="Base64编码表"><a href="#Base64编码表" class="headerlink" title="Base64编码表"></a><strong>Base64编码表</strong></h3><table>
+<thead>
+<tr>
+<th style="text-align:center">Value Encoding</th>
+<th style="text-align:center">Value Encoding</th>
+<th style="text-align:center">Value Encoding</th>
+<th style="text-align:center">Value Encoding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0 A</td>
+<td style="text-align:center">17 R</td>
+<td style="text-align:center">34 i</td>
+<td style="text-align:center">51 z</td>
+</tr>
+<tr>
+<td style="text-align:center">1 B</td>
+<td style="text-align:center">18 S</td>
+<td style="text-align:center">35 j</td>
+<td style="text-align:center">52 0</td>
+</tr>
+<tr>
+<td style="text-align:center">2 C</td>
+<td style="text-align:center">19 T</td>
+<td style="text-align:center">36 k</td>
+<td style="text-align:center">53 1</td>
+</tr>
+<tr>
+<td style="text-align:center">3 D</td>
+<td style="text-align:center">20 U</td>
+<td style="text-align:center">37 l</td>
+<td style="text-align:center">54 2</td>
+</tr>
+<tr>
+<td style="text-align:center">4 E</td>
+<td style="text-align:center">21 V</td>
+<td style="text-align:center">38 m</td>
+<td style="text-align:center">55 3</td>
+</tr>
+<tr>
+<td style="text-align:center">5 F</td>
+<td style="text-align:center">22 W</td>
+<td style="text-align:center">39 n</td>
+<td style="text-align:center">56 4</td>
+</tr>
+<tr>
+<td style="text-align:center">6 G</td>
+<td style="text-align:center">23 X</td>
+<td style="text-align:center">40 o</td>
+<td style="text-align:center">57 5</td>
+</tr>
+<tr>
+<td style="text-align:center">7 H</td>
+<td style="text-align:center">24 Y</td>
+<td style="text-align:center">41 p</td>
+<td style="text-align:center">58 6</td>
+</tr>
+<tr>
+<td style="text-align:center">8 I</td>
+<td style="text-align:center">25 Z</td>
+<td style="text-align:center">42 q</td>
+<td style="text-align:center">59 7</td>
+</tr>
+<tr>
+<td style="text-align:center">9 J</td>
+<td style="text-align:center">26 a</td>
+<td style="text-align:center">43 r</td>
+<td style="text-align:center">60 8</td>
+</tr>
+<tr>
+<td style="text-align:center">10 K</td>
+<td style="text-align:center">27 b</td>
+<td style="text-align:center">44 s</td>
+<td style="text-align:center">61 9</td>
+</tr>
+<tr>
+<td style="text-align:center">11 L</td>
+<td style="text-align:center">28 c</td>
+<td style="text-align:center">45 t</td>
+<td style="text-align:center">62 +</td>
+</tr>
+<tr>
+<td style="text-align:center">12 M</td>
+<td style="text-align:center">29 d</td>
+<td style="text-align:center">46 u</td>
+<td style="text-align:center">63 /</td>
+</tr>
+<tr>
+<td style="text-align:center">13 N</td>
+<td style="text-align:center">30 e</td>
+<td style="text-align:center">47 v</td>
+</tr>
+<tr>
+<td style="text-align:center">14 O</td>
+<td style="text-align:center">31 f</td>
+<td style="text-align:center">48 w</td>
+<td style="text-align:center">(pad) =</td>
+</tr>
+<tr>
+<td style="text-align:center">15 P</td>
+<td style="text-align:center">32 g</td>
+<td style="text-align:center">49 x</td>
+</tr>
+<tr>
+<td style="text-align:center">16 Q</td>
+<td style="text-align:center">33 h</td>
+<td style="text-align:center">50 y</td>
+</tr>
+</tbody>
+</table>
+<p>Base64是一种很常见的编码规范，其作用是将二进制序列转换为人类可读的ASCII字符序列，<strong>常用在需用通过文本协议（比如HTTP和SMTP）来传输二进制数据的情况下</strong>。</p>
+<p>Base64并不是一种用于安全领域的加密解密算法（这类算法有DES等），尽管我们有时也听到使用Base64来加密解密的说法，但这里所说的加密与解密实际是指编码（encode）和解码（decode）的过程，其变换是非常简单的，仅仅能够避免信息被直接识别。</p>
+<p>Base64编解码算法都很简单，网上有很多源码，这里就不介绍了。</p>
+<p>那java中如何使用这种编码呢？其实JDK里边相应的类和方法，但是API里是看不到的，网上都说是编写JDK的内部人员专用的，java中可以直接使用，但不提倡大家用，可以看看这个<a href="http://wenda.haosou.com/q/1378566517069409" title="点击查看" target="_blank" rel="noopener">http://wenda.haosou.com/q/1378566517069409</a>。</p>
+<p>不过，对此有开源的jar包</p>
+<blockquote>
+<p>javabase64-1.2.jar<br>下载地址：<a href="http://files.blogjava.net/xmatthew/javabase64-1.2.jar.zip" title="点击下载" target="_blank" rel="noopener">http://files.blogjava.net/xmatthew/javabase64-1.2.jar.zip</a>。</p>
+</blockquote>
+<p>引入这个jar包后，几行代码就可以实现编码与解码了：</p>
+<h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码:"></a>示例代码:</h4><h4 id="String类型：进行Base64编码"><a href="#String类型：进行Base64编码" class="headerlink" title="String类型：进行Base64编码"></a>String类型：进行Base64编码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String encoded = Base64.encode(&quot;Hello, world!&quot;);</span><br></pre></td></tr></table></figure>
+<h4 id="String类型：进行Base64解码"><a href="#String类型：进行Base64解码" class="headerlink" title="String类型：进行Base64解码"></a>String类型：进行Base64解码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String decoded = Base64.decode(encoded);</span><br></pre></td></tr></table></figure>
+<h4 id="指定字符编码方式"><a href="#指定字符编码方式" class="headerlink" title="指定字符编码方式"></a>指定字符编码方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String encoded = Base64.encode(&quot;Hello, world!&quot;, &quot;UTF-8&quot;);</span><br><span class="line">String decoded = Base64.decode(encoded, &quot;UTF-8&quot;);</span><br></pre></td></tr></table></figure>
+<h4 id="对文件进行编码"><a href="#对文件进行编码" class="headerlink" title="对文件进行编码:"></a>对文件进行编码:</h4><p>如果文件比较小，可以通过以下方式，直接读取到内存中进行编码处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">byte[] source = ...; // load your data here</span><br><span class="line">byte[] encoded = Base64.encode(source);</span><br><span class="line">byte[] decoded = Base64.decode(encoded);</span><br></pre></td></tr></table></figure>
+<p>如果大件比较大，则建议使用stream:</p>
+<h4 id="代码示例Base64编码："><a href="#代码示例Base64编码：" class="headerlink" title="代码示例Base64编码："></a>代码示例Base64编码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InputStream inputStream = new FileInputStream(&quot;source.jpg&quot;);</span><br><span class="line">OutputStream outputStream = new FileOutputStream(&quot;encoded.b64&quot;);</span><br><span class="line">Base64.encode(inputStream, outputStream);</span><br><span class="line">outputStream.close();</span><br><span class="line">inputStream.close();</span><br></pre></td></tr></table></figure>
+<h4 id="代码示例Base64解码："><a href="#代码示例Base64解码：" class="headerlink" title="代码示例Base64解码："></a>代码示例Base64解码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InputStream inputStream = new FileInputStream(&quot;encoded.b64&quot;);</span><br><span class="line">OutputStream outputStream = new FileOutputStream(&quot;decoded.jpg&quot;);</span><br><span class="line">Base64.decode(inputStream, outputStream);</span><br><span class="line">outputStream.close();</span><br><span class="line">inputStream.close();</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>作者：Java我人生<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/chenleixing/article/details/46543901" title="点击跳转" target="_blank" rel="noopener">https://blog.csdn.net/chenleixing/article/details/46543901</a></p>
+</blockquote>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/posts/0612cjpbsna1f00005js653v680ni.html" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/0612cjpbsna2100015js6ms7pdah8.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
